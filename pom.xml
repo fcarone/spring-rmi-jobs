@@ -10,6 +10,18 @@
     <spring.version>3.0.0.RELEASE</spring.version>
     <aspectj.version>1.5.3</aspectj.version>
   </properties>
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <connection>scm:git:git://github.com/fcarone/spring-rmi-jobs.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/fcarone/spring-rmi-jobs.git</developerConnection>
+    <url>http://github.com/fcarone/spring-rmi-jobs</url>
+  </scm>
   <build>
     <plugins>
       <plugin>
