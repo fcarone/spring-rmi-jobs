@@ -1,0 +1,24 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:util="http://www.springframework.org/schema/util" xmlns:amq="http://activemq.org/config/1.0"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd
+     http://activemq.org/config/1.0 http://activemq.apache.org/schema/core/activemq-core-5.0.0.xsd">
+  <!-- MANAGERS CONFIG -->
+  <bean id="server" class="com.energeya.lab.springrmijobs.ServerImpl" />
+  <bean id="jobQueueManager" class="com.energeya.lab.springrmijobs.JobQueueManagerImpl" />
+
+  <bean name="/serverRMI" class="org.springframework.remoting.rmi.RmiServiceExporter" lazy-init="false">
+    <property name="service" ref="server" />
+    <property name="serviceName" value="serverRMI" />
+    <property name="serviceInterface" value="com.energeya.lab.springrmijobs.Server" />
+    <property name="registryPort" value="1299" />
+  </bean>
+
+  <bean name="/jobQueueManagerRMI" class="org.springframework.remoting.rmi.RmiServiceExporter" lazy-init="false">
+    <property name="service" ref="jobQueueManager" />
+    <property name="serviceName" value="jobQueueManagerRMI" />
+    <property name="serviceInterface" value="com.energeya.lab.springrmijobs.JobQueueManager" />
+    <property name="registryPort" value="1299" />
+  </bean>
+
+</beans>

@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+  <!-- RMI CONFIG -->
+
+  <bean id="remoteInvocationFactory" class="com.energeya.lab.springrmijobs.JobRemoteInvocationFactory" />
+
+  <bean id="serverRMI" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+    <property name="serviceUrl" value="rmi://127.0.0.1:1299/serverRMI" />
+    <property name="serviceInterface" value="com.energeya.lab.springrmijobs.Server" />
+    <property name="cacheStub" value="true" />
+    <property name="lookupStubOnStartup" value="false" />
+    <property name="refreshStubOnConnectFailure" value="true" />
+    <property name="remoteInvocationFactory">
+      <ref local="remoteInvocationFactory" />
+    </property>
+  </bean>
+
+  <bean id="jobQueueManagerRMI" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+    <property name="serviceUrl" value="rmi://127.0.0.1:1299/jobQueueManagerRMI" />
+    <property name="serviceInterface" value="com.energeya.lab.springrmijobs.JobQueueManager" />
+    <property name="cacheStub" value="true" />
+    <property name="lookupStubOnStartup" value="false" />
+    <property name="refreshStubOnConnectFailure" value="true" />
+  </bean>
+</beans>
