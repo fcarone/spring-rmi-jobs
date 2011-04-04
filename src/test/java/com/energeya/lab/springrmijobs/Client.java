@@ -1,12 +1,13 @@
 package com.energeya.lab.springrmijobs;
 
+import junit.framework.Assert;
+
+import org.apache.xbean.spring.context.ClassPathXmlApplicationContext;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import org.springframework.context.ApplicationContext;
 
-@ContextConfiguration(locations = { "/spring-tests.xml" })
-public class Client extends AbstractJUnit4SpringContextTests
+public class Client
 {
     Server server;
     private JobQueueManager jobQueueManager;
@@ -19,11 +20,10 @@ public class Client extends AbstractJUnit4SpringContextTests
             @Override
             public void run()
             {
-                UUIDJob uuidJob = new UUIDJob();
-                uuidJob.init();
-                System.out.println("CLIENT: " + uuidJob.getUUID());
-                UUIDJobHolder.setUUIDJob(uuidJob);
+                Assert.assertNull(UUIDJobHolder.getUUIDJob());
                 server.getCode();
+                Assert.assertNotNull(UUIDJobHolder.getUUIDJob());
+                System.out.println("CLIENT: " + UUIDJobHolder.getUUIDJob().getUUID());
             }
             
         };
@@ -42,8 +42,15 @@ public class Client extends AbstractJUnit4SpringContextTests
     @Before
     public void setupTest()
     {
-        this.server = (Server) applicationContext.getBean("serverRMI");
-        this.jobQueueManager = (JobQueueManager) applicationContext.getBean("jobQueueManagerRMI");
+        this.server = (Server) clientCtx.getBean("server");
+        this.jobQueueManager = (JobQueueManager) clientCtx.getBean("jobQueueManagerRMI");
+    }
+    
+    ApplicationContext serverCtx,clientCtx;
+    @Before
+    public void setUp(){
+        serverCtx = new  ClassPathXmlApplicationContext("/spring-services.xml");
+        clientCtx = new  ClassPathXmlApplicationContext("/spring-client.xml");
     }
 
 }

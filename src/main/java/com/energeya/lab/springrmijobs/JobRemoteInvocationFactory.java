@@ -14,14 +14,13 @@ import org.springframework.remoting.support.RemoteInvocationFactory;
  */
 public class JobRemoteInvocationFactory implements RemoteInvocationFactory
 {
-
     /**
      * {@inheritDoc}
      */
-    public RemoteInvocation createRemoteInvocation(MethodInvocation methodInvocation)
+    @Override
+	public RemoteInvocation createRemoteInvocation(MethodInvocation methodInvocation)
     {
         JobRemoteInvocation tlc = new JobRemoteInvocation(methodInvocation);
         return tlc;
     }
-
 }
