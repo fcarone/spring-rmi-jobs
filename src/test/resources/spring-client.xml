@@ -6,7 +6,7 @@
 
   <bean id="remoteInvocationFactory" class="com.energeya.lab.springrmijobs.JobRemoteInvocationFactory" />
 
-  <bean id="serverRMI" class="org.springframework.remoting.rmi.RmiProxyFactoryBean" lazy-init="true">
+  <bean id="serverRMI" class="com.energeya.lab.springrmijobs.rmi.client.JobClientInvokeRmiInterface" lazy-init="true">
     <property name="serviceUrl" value="rmi://127.0.0.1:1299/serverRMI" />
     <property name="serviceInterface" value="com.energeya.lab.springrmijobs.Server" />
     <property name="cacheStub" value="true" />

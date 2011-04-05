@@ -19,10 +19,6 @@ public class Client extends AbstractJUnit4SpringContextTests
             @Override
             public void run()
             {
-                UUIDJob uuidJob = new UUIDJob();
-                uuidJob.init();
-                System.out.println("CLIENT: " + uuidJob.getUUID());
-                UUIDJobHolder.setUUIDJob(uuidJob);
                 server.getCode();
             }
             
