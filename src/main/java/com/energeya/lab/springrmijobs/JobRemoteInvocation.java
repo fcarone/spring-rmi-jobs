@@ -26,7 +26,6 @@ public class JobRemoteInvocation extends RemoteInvocation
      */
     public JobRemoteInvocation(MethodInvocation methodInvocation)
     {
-        //Client code
         super(methodInvocation);
         uuidJob = UUIDJobHolder.getUUIDJob();
     }
@@ -38,7 +37,6 @@ public class JobRemoteInvocation extends RemoteInvocation
     public Object invoke(Object targetObject) throws NoSuchMethodException, IllegalAccessException,
         InvocationTargetException
     {
-        //Server code
         UUIDJobHolder.setUUIDJob(uuidJob);
         System.out.println("SERVER: " + uuidJob.getUUID());
         JobQueueHolder.addJob(uuidJob.getUUID(), Thread.currentThread());
